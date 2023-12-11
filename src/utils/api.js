@@ -8,4 +8,8 @@ const getArticles = () => {
     return newsApi.get('/articles')
 };
 
-export default getArticles
+const getArticleById = (articleId) => {
+    return newsApi.get(`/articles/${articleId}`)
+}
+
+export { getArticles, getArticleById }

@@ -5,6 +5,7 @@ import Home from './components/Home'
 import NavFooter from './components/NavFooter';
 import NavHeader from './components/NavHeader';
 import Topics from './components/Topics';
+import ArticlePage from './components/ArticlePage';
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
         <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/topics" element={<Topics/>}/>
+        <Route path="/articles/:article_id" element={<ArticlePage/>}/>
         </Routes>
         <NavFooter/>
         </>

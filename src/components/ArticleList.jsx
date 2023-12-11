@@ -5,7 +5,7 @@ const ArticleList = ({articles}) => {
     return (
         <section className="home">
             {articles.map((article) => {
-                return <ArticleCard article={article}/>
+                return <ArticleCard key={article.article_id} article={article}/>
             })}
         </section>
     );
