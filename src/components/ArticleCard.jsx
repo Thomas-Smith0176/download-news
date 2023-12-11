@@ -1,6 +1,6 @@
 const ArticleCard = ({article}) => {
     return (
-        <section>
+        <section className="article-card">
             <h2>{article.title}</h2>
             <h3>By {article.author}</h3>
             <p>{article.topic}</p>
