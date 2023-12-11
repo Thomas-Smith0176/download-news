@@ -5,3 +5,32 @@
   text-align: center;
 }
 
+h1 {
+  border: 1px solid green;
+}
+
+.home {
+  border: 1px solid green;
+}
+
+.topics {
+  border: 1px solid green; 
+}
+
+.article-card {
+  border: 1px solid green;
+  display: grid;
+  
+}
+
+.article-card-img {
+  width: 60vw;
+}
+
+.nav-header {
+  border: 1px solid green; 
+}
+
+.nav-footer {
+  border: 1px solid green; 
+}
