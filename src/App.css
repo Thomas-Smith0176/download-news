@@ -1,7 +1,5 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  margin: 0;
   text-align: center;
 }
 
@@ -31,19 +29,25 @@ a {
   width: 60vw;
 }
 
-.article-page {
-  display: grid;
+.article-page { 
+  /* display: grid;
+  min-height: 100vh;
   grid-template-areas: 
   "title"
   "author"
   "date"
   "image"
-  "body";
+  "body"
+  "comments"; */
 }
 
 .article-page-img {
-  grid-area: image;
-  justify-self: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width:1000px;
+  
 }
 
 .nav-header {
@@ -52,4 +56,37 @@ a {
 
 .nav-footer {
   border: 1px solid green; 
+}
+
+/* comments */
+
+.comment {
+  border: 1px solid green; 
+  grid-area: comments;
+  display: grid;
+  grid-template-areas: 
+  "author date"
+  "body body"
+  "votes none"
+  ;
+}
+
+.comment-author {
+  grid-area: author;
+  text-align: left;
+}
+
+.comment-date {
+  grid-area: date;
+  text-align: right;
+}
+
+.comment-body {
+  grid-area: body;
+  text-align: left;
+}
+
+.comment-votes {
+  grid-area: votes;
+  text-align: left;
 }

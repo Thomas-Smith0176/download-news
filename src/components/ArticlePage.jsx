@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { getArticleById } from '../utils/api';
 import { useEffect, useState } from 'react';
+import CommentList from './CommentsList';
 
 const ArticlePage = () => {
     const {article_id} = useParams()
@@ -25,6 +26,7 @@ const ArticlePage = () => {
                 <p>{`uploaded ${article.created_at.slice(0, 10)} at ${article.created_at.slice(11, 19)}`}</p>
                 <img className="article-page-img" src={article.article_img_url}></img>
                 <p>{article.body}</p>
+                <CommentList/>
             </section>
         )
 };
