@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { getArticleById } from '../utils/api';
 import { useEffect, useState } from 'react';
+import parseDate from '../utils/dates';
 
 const ArticlePage = () => {
     const {article_id} = useParams()
@@ -22,7 +23,7 @@ const ArticlePage = () => {
             <section className='article-page'>
                 <h2>{article.title}</h2>
                 <h3>{article.author}</h3>
-                <p>{`uploaded ${article.created_at.slice(0, 10)} at ${article.created_at.slice(11, 19)}`}</p>
+                <p>{`uploaded ${parseDate(article.created_at)}`}</p>
                 <img className="article-page-img" src={article.article_img_url}></img>
                 <p>{article.body}</p>
             </section>
