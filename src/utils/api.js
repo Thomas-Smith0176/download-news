@@ -16,4 +16,19 @@ const getComments = (articleId) => {
     return newsApi.get(`/articles/${articleId}/comments`)
 };
 
-export { getArticles, getArticleById, getComments };
+const getUsers = () => {
+    return newsApi.get("/users")
+};
+
+const patchArticle = (articleId, incVote) => {
+    return newsApi.patch(`/articles/${articleId}`, {inc_votes: incVote})
+}
+
+const postComment = (articleId, username, comment) => {
+    return newsApi.post(`/articles/${articleId}/comments`, {
+        username: username, 
+        body: comment
+    })
+};
+
+export { getArticles, getArticleById, getComments, getUsers, patchArticle, postComment };
