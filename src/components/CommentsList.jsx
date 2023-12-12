@@ -22,6 +22,7 @@ const CommentList = () => {
     return (
         <section>
             <h4>Commnets</h4>
+            {comments.length === 0 && <p>No comments yet!</p>}
             {comments.map((comment) => {
                 return <Comment key={comment.comment_id} comment={comment}/>
             })}
