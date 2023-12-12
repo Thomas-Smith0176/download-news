@@ -9,16 +9,16 @@ import ArticlePage from './components/ArticlePage';
 
 function App() {
     return (
-        <>
-        <Header/>
-        <NavHeader/>
-        <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/topics" element={<Topics/>}/>
-        <Route path="/articles/:article_id" element={<ArticlePage/>}/>
-        </Routes>
-        <NavFooter/>
-        </>
+        <main>
+            <Header/>
+            <NavHeader/>
+            <Routes>
+            <Route path="/" element={<Home/>}/>
+            <Route path="/topics" element={<Topics/>}/>
+            <Route path="/articles/:article_id" element={<ArticlePage/>}/>
+            </Routes>
+            <NavFooter/>
+        </main>
     );  
 };
 
