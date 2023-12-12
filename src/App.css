@@ -20,11 +20,30 @@ h1 {
 .article-card {
   border: 1px solid green;
   display: grid;
-  
+}
+
+a {
+  text-decoration: none;
+  color: black
 }
 
 .article-card-img {
   width: 60vw;
+}
+
+.article-page {
+  display: grid;
+  grid-template-areas: 
+  "title"
+  "author"
+  "date"
+  "image"
+  "body";
+}
+
+.article-page-img {
+  grid-area: image;
+  justify-self: center;
 }
 
 .nav-header {
