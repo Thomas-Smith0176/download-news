@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom';
 import { getArticleById, patchArticle } from '../utils/api';
 import { useEffect, useState } from 'react';
 import CommentList from './CommentsList';
@@ -9,6 +9,7 @@ const ArticlePage = () => {
     const [article, setArticle] = useState()
     const [isLoading, setIsLoading] = useState(true)
     const [votes, setVotes] = useState()
+    const [err, setErr] = useState(null)
 
     useEffect(() => {
         getArticleById(article_id).then((res) => {
@@ -19,9 +20,11 @@ const ArticlePage = () => {
     }, [])
 
     function handleVote(article_id, incVote) {
-        patchArticle(article_id, incVote)
-        const newVotes = votes + incVote
-        setVotes(newVotes)
+        setVotes((currVotes) => currVotes + incVote)
+        patchArticle(article_id, incVote).catch((err) => {
+            setVotes((currVotes) => currVotes - incVote)
+            setErr('Something went wrong! Please try again')
+        })
     }
 
     if (isLoading) {
@@ -40,6 +43,7 @@ const ArticlePage = () => {
                     {votes !== 1 && <p>{votes} votes</p>}
                     <button onClick={() => {handleVote(article_id, 1)}}>upvote</button>
                     <button onClick={() => {handleVote(article_id, -1)}}>downvote</button>
+                    {err && <p>{err}</p>}
                 </div>
                 <CommentList/>
             </section>
