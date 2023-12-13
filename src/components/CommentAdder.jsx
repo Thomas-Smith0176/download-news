@@ -9,7 +9,7 @@ const CommentAdder = ({setComments}) => {
     const {currUser, setCurrUser} = useContext(UserContext)
     const {article_id} = useParams()
 
-    const [newComment, setNewComment] = useState();
+    const [newComment, setNewComment] = useState('');
 
     function handlePostComment() {
         const timePosted = new Date();
@@ -20,8 +20,7 @@ const CommentAdder = ({setComments}) => {
             votes: 0
         }
         setComments((currComments) => [newCommentObj, ...currComments])
-        postComment(article_id, currUser.username, newComment).then(() => {
-        })
+        postComment(article_id, currUser.username, newComment)
     };
 
     return (
