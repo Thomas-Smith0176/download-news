@@ -12,9 +12,7 @@ const ArticlePage = () => {
     const [isLoading, setIsLoading] = useState(true)
     const [votes, setVotes] = useState(0)
     const [err, setErr] = useState(null)
-    const [show, setShow] = useState(false)
-
-    console.log(show)
+    const [showError, setShowError] = useState(false)
 
     useEffect(() => {
         getArticleById(article_id).then((res) => {
@@ -50,18 +48,17 @@ const ArticlePage = () => {
                     <Button onClick={() => {handleVote(article_id, -1)}}>downvote</Button>
                     {err && <p>{err}</p>}
                 </div>
-                <CommentList setShow={setShow}/>
+                <CommentList setShowError={setShowError}/>
                 <ToastContainer position='middle-end' containerPosition='fixed'>
-                <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
+                <Toast onClose={() => setShowError(false)} show={showError} delay={3000} autohide>
                 <Toast.Header>
                     <img
                     src="holder.js/20x20?text=%20"
                     className="rounded me-2"
                     alt=""
                     />
-                    {/* <strong className="me-auto">Download</strong> */}
                 </Toast.Header>
-                <Toast.Body>Comment Deleted!</Toast.Body>
+                <Toast.Body>Failed to delete comment, please try again</Toast.Body>
                 </Toast>
                 </ToastContainer>
             </section>
