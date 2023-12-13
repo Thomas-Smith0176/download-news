@@ -20,9 +20,17 @@ const getUsers = () => {
     return newsApi.get("/users")
 };
 
+const getTopics = () => {
+    return newsApi.get("/topics")
+};
+
+const getArticlesByTopic = (topic) => {
+    return newsApi.get(`/articles?topic=${topic}`)
+}
+
 const patchArticle = (articleId, incVote) => {
     return newsApi.patch(`/articles/${articleId}`, {inc_votes: incVote})
-}
+};
 
 const postComment = (articleId, username, comment) => {
     return newsApi.post(`/articles/${articleId}/comments`, {
@@ -35,4 +43,4 @@ const deleteComment = (commentId) => {
     return newsApi.delete(`/comments/${commentId}`)
 };
 
-export { getArticles, getArticleById, getComments, getUsers, patchArticle, postComment, deleteComment };
+export { getArticles, getArticleById, getComments, getUsers, getTopics, getArticlesByTopic, patchArticle, postComment, deleteComment };

@@ -14,8 +14,6 @@ const ArticlePage = () => {
     const [err, setErr] = useState(null)
     const [show, setShow] = useState(false)
 
-    console.log(show)
-
     useEffect(() => {
         getArticleById(article_id).then((res) => {
             setArticle(res.data.article)
@@ -59,7 +57,6 @@ const ArticlePage = () => {
                     className="rounded me-2"
                     alt=""
                     />
-                    {/* <strong className="me-auto">Download</strong> */}
                 </Toast.Header>
                 <Toast.Body>Comment Deleted!</Toast.Body>
                 </Toast>
