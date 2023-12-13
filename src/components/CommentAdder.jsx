@@ -10,6 +10,7 @@ const CommentAdder = ({setComments}) => {
     const {article_id} = useParams()
 
     const [newComment, setNewComment] = useState('');
+    const [err, setErr] = useState(null)
 
     function handlePostComment() {
         const timePosted = new Date();
@@ -20,7 +21,10 @@ const CommentAdder = ({setComments}) => {
             votes: 0
         }
         setComments((currComments) => [newCommentObj, ...currComments])
-        postComment(article_id, currUser.username, newComment)
+        postComment(article_id, currUser.username, newComment).catch(() => {
+            setComments((currComments) => currComments.shift())
+            setErr('Something went wrong! Please try that again')
+        })
     };
 
     return (
@@ -28,6 +32,7 @@ const CommentAdder = ({setComments}) => {
         <Form>
             <Form.Label className="comment-label">Post a comment</Form.Label>
             <Form.Control type="text" placeholder="new comment..." value={newComment} onChange={(event) => setNewComment(event.target.value)}></Form.Control>
+            {err && <p>{err}</p>}
             <Button onClick={() => {handlePostComment()}}>Post</Button>
         </Form>
         </>
