@@ -23,7 +23,7 @@ const ArticlePage = () => {
         setVotes((currVotes) => currVotes + incVote)
         patchArticle(article_id, incVote).catch((err) => {
             setVotes((currVotes) => currVotes - incVote)
-            setErr('Something went wrong! Please try again')
+            setErr('Something went wrong! Please try that again')
         })
     }
 
