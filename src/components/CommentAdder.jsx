@@ -13,8 +13,10 @@ const CommentAdder = ({setComments}) => {
     const [err, setErr] = useState(null)
 
     function handlePostComment() {
+        setNewComment('')
         const timePosted = new Date();
         const newCommentObj = {
+            comment_id: -1,
             author: currUser.username,
             body: newComment,
             createdAt: parseDate(timePosted),
@@ -29,12 +31,14 @@ const CommentAdder = ({setComments}) => {
 
     return (
         <>
+        {!currUser && <p>Sign in to post a comment</p>}
+        {currUser &&
         <Form>
             <Form.Label className="comment-label">Post a comment</Form.Label>
             <Form.Control type="text" placeholder="new comment..." value={newComment} onChange={(event) => setNewComment(event.target.value)}></Form.Control>
             {err && <p>{err}</p>}
             <Button onClick={() => {handlePostComment()}}>Post</Button>
-        </Form>
+        </Form>}
         </>
     )
 };

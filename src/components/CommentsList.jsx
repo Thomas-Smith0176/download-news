@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getComments } from "../utils/api";
 import { useParams } from "react-router-dom";
 import Comment from "./Comment";
 import CommentAdder from "./CommentAdder";
 
-const CommentList = () => {
+const CommentList = ({setShow}) => {
     const {article_id} = useParams();
     const [comments, setComments] = useState();
     const [isLoading, setIsLoading] = useState(true);
@@ -14,7 +14,7 @@ const CommentList = () => {
             setComments(res.data.comments)
             setIsLoading(false)
         })
-    }, []);
+    }, [comments]);
 
     if (isLoading) {
         return <p>Loading...</p>
@@ -26,10 +26,10 @@ const CommentList = () => {
             <CommentAdder setComments={setComments}/>
             {comments.length === 0 && <p>No comments yet!</p>}
             {comments.map((comment) => {
-                return <Comment key={comment.comment_id} comment={comment}/>
+                return <Comment key={comment.comment_id} comment={comment} setComments={setComments} setShow={setShow}/>
             })}
         </section>
-    )
+    );
 };
 
 export default CommentList;

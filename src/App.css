@@ -81,7 +81,7 @@ a {
   grid-template-areas: 
   "author date"
   "body body"
-  "votes none"
+  "votes delete"
   ;
 }
 
@@ -103,6 +103,11 @@ a {
 .comment-votes {
   grid-area: votes;
   text-align: left;
+}
+
+.comment-delete {
+  grid-area: delete;
+  width: 80px
 }
 
 .user-avatar-cropper {

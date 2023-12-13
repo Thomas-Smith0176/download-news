@@ -3,13 +3,18 @@ import { getArticleById, patchArticle } from '../utils/api';
 import { useEffect, useState } from 'react';
 import CommentList from './CommentsList';
 import parseDate from '../utils/dates';
+import { Button, Toast, ToastContainer } from 'react-bootstrap';
+
 
 const ArticlePage = () => {
     const {article_id} = useParams()
     const [article, setArticle] = useState()
     const [isLoading, setIsLoading] = useState(true)
-    const [votes, setVotes] = useState()
+    const [votes, setVotes] = useState(0)
     const [err, setErr] = useState(null)
+    const [show, setShow] = useState(false)
+
+    console.log(show)
 
     useEffect(() => {
         getArticleById(article_id).then((res) => {
@@ -41,11 +46,24 @@ const ArticlePage = () => {
                 <div className="article-page-votes">   
                     {votes === 1 && <p>{votes} vote</p>}
                     {votes !== 1 && <p>{votes} votes</p>}
-                    <button onClick={() => {handleVote(article_id, 1)}}>upvote</button>
-                    <button onClick={() => {handleVote(article_id, -1)}}>downvote</button>
+                    <Button onClick={() => {handleVote(article_id, 1)}}>upvote</Button>
+                    <Button onClick={() => {handleVote(article_id, -1)}}>downvote</Button>
                     {err && <p>{err}</p>}
                 </div>
-                <CommentList/>
+                <CommentList setShow={setShow}/>
+                <ToastContainer position='middle-end' containerPosition='fixed'>
+                <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
+                <Toast.Header>
+                    <img
+                    src="holder.js/20x20?text=%20"
+                    className="rounded me-2"
+                    alt=""
+                    />
+                    {/* <strong className="me-auto">Download</strong> */}
+                </Toast.Header>
+                <Toast.Body>Comment Deleted!</Toast.Body>
+                </Toast>
+                </ToastContainer>
             </section>
         )
 };
