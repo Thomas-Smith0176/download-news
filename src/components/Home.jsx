@@ -6,19 +6,21 @@ import { ArticlesContext } from '../contexts/Articles';
 const Home = () => {
     const [isLoading, setIsLoading] = useState(true)
     const {articles, setArticles} = useContext(ArticlesContext)
+    const [sortBy, setSortBy] = useState()
+    const [order, setOrder] = useState()
 
     useEffect(()=> {
-        getArticles().then((res) => {
-            setArticles(res.data.articles)
+        getArticles(sortBy, order).then((res) => {
+            setArticles([...res.data.articles])
             setIsLoading(false)
         })
-    }, [articles])
+    }, [sortBy, order])
 
     if (isLoading) {
         return <p>Loading...</p>
     }
 
-    return <ArticleList articles={articles}/>
+    return <ArticleList articles={articles} setSortBy={setSortBy} setOrder={setOrder}/>
 };
 
 export default Home;
