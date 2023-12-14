@@ -5,8 +5,9 @@ import Header from './components/Header'
 import Home from './components/Home'
 import NavFooter from './components/NavFooter';
 import NavHeader from './components/NavHeader';
-import Topics from './components/Topics';
+import Topics from './components/TopicsList';
 import ArticlePage from './components/ArticlePage';
+import TopicArticles from './components/TopicArticles';
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="/" element={<Home/>}/>
             <Route path="/topics" element={<Topics/>}/>
             <Route path="/articles/:article_id" element={<ArticlePage/>}/>
+            <Route path="/topics/:topic" element={<TopicArticles/>}/>
             </Routes>
             <NavFooter/>
         </main>
