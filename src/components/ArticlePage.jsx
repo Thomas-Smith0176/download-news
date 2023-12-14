@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import CommentList from './CommentsList';
 import parseDate from '../utils/dates';
 import { Button, Toast, ToastContainer } from 'react-bootstrap';
+import ErrorToast from './ErrorToast';
 
 
 const ArticlePage = () => {
@@ -16,6 +17,7 @@ const ArticlePage = () => {
     const [upvoteClick, setUpvoteClick] = useState(false)
     const [downvoteClick, setDownvoteClick] = useState(false)
     const [showError, setShowError] = useState(false)
+    const [errorMsg, setErrorMsg] = useState('')
 
     useEffect(() => {
         getArticleById(article_id).then((res) => {
@@ -39,11 +41,12 @@ const ArticlePage = () => {
             setUpvoteClick(true)
         }
         setVotes((currVotes) => currVotes + incVote)
-        patchArticle(article_id, incVote).catch((err) => {
+        patchArticle(article_id, incVote).catch(() => {
             setVotes((currVotes) => currVotes - incVote)
-            setUpvoteDiabled(false)
-            setDownvoteDiabled(false)
-            //error message toast here
+            setUpvoteDisabled(false)
+            setDownvoteDisabled(false)
+            setShowError(true)
+            setErrorMsg('Upvote failed')
         })
     }
 
@@ -59,11 +62,12 @@ const ArticlePage = () => {
             setDownvoteClick(true)
         }
         setVotes((currVotes) => currVotes + incVote)
-        patchArticle(article_id, incVote).catch((err) => {
+        patchArticle(article_id, incVote).catch(() => {
             setVotes((currVotes) => currVotes - incVote)
-            setUpvoteDiabled(false)
-            setDownvoteDiabled(false)
-            //error message toast here
+            setUpvoteDisabled(false)
+            setDownvoteDisabled(false)
+            setShowError(true)
+            setErrorMsg('Downvote failed')
         })
     }
     
@@ -86,16 +90,7 @@ const ArticlePage = () => {
                 </div>
                 <CommentList setShowError={setShowError}/>
                 <ToastContainer position='middle-end' containerPosition='fixed'>
-                <Toast onClose={() => setShowError(false)} show={showError} delay={3000} autohide>
-                <Toast.Header>
-                    <img
-                    src="holder.js/20x20?text=%20"
-                    className="rounded me-2"
-                    alt=""
-                    />
-                </Toast.Header>
-                <Toast.Body>Failed to delete comment, please try again</Toast.Body>
-                </Toast>
+                    <ErrorToast setShowError={setShowError} showError={showError} errorMsg={errorMsg}/>
                 </ToastContainer>
             </section>
         )
