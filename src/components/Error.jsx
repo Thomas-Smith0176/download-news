@@ -1,6 +1,6 @@
 const Error = ({location, status, message}) => {
     if (!message) {
-        return <p>Page not found</p>
+        return <h3>Error 404: Page not found</h3>
     }
     return <section>
         <h2>Could not display {location}</h2>
