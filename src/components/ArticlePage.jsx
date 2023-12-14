@@ -64,7 +64,7 @@ const ArticlePage = () => {
             //error message toast here
         })
     }
-
+    
     if (isLoading) {
         return <p>Loading...</p>
     }
