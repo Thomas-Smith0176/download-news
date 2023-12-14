@@ -31,4 +31,8 @@ const postComment = (articleId, username, comment) => {
     })
 };
 
-export { getArticles, getArticleById, getComments, getUsers, patchArticle, postComment };
+const deleteComment = (commentId) => {
+    return newsApi.delete(`/comments/${commentId}`)
+};
+
+export { getArticles, getArticleById, getComments, getUsers, patchArticle, postComment, deleteComment };
