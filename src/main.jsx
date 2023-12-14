@@ -6,12 +6,12 @@ import { ArticlesProvider } from './contexts/Articles.jsx'
 import { UserProvider } from './contexts/User.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <BrowserRouter>
     <UserProvider>
+    <BrowserRouter>
     <ArticlesProvider>
         <App />
     </ArticlesProvider>
-    </UserProvider>
     </BrowserRouter>
+    </UserProvider>
 )
 

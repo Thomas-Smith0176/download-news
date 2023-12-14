@@ -9,6 +9,7 @@ const getArticles = (sortBy='created_at', order='desc') => {
 };
 
 const getArticleById = (articleId) => {
+    console.log(`/articles/${articleId}`)
     return newsApi.get(`/articles/${articleId}`)
 };
 

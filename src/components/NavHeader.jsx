@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import UsersList from './UsersList';
 import { UserContext } from '../contexts/User';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Accordion } from 'react-bootstrap';
 
 const NavHeader = () => {
@@ -12,19 +12,24 @@ const NavHeader = () => {
     const handleShow = () => setShow(true);
 
     const {currUser, setCurrUser} = useContext(UserContext)
+    const navigate = useNavigate()
 
     return (
         <nav className="nav-header">
             <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="primary" onClick={handleShow} className='nav-button'>
      Account
       </Button>
-      <Button variant='primary' aria-label='link to home page'>
-        <Link id="home-link" to="/">Home</Link>
+        {/* <Link id="home-link" to="/" > */}
+      <Button variant='primary' aria-label='link to home page' className='nav-button' onClick={() => {navigate("/")}}>
+          Home
       </Button>
-      <Button variant='primary' aria-label='link to topics page'>
-        <Link id="topics-link" to="/topics">Topics</Link>
+          {/* </Link> */}
+        {/* <Link id="topics-link" to="/topics"> */}
+      <Button variant='primary' aria-label='link to topics page' className='nav-button' onClick={() => {navigate("/topics")}}>
+          Topics
       </Button>
+          {/* </Link> */}
 
       <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton>

@@ -3,11 +3,11 @@ import './App.css'
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header'
 import Home from './components/Home'
-import NavFooter from './components/NavFooter';
 import NavHeader from './components/NavHeader';
 import Topics from './components/TopicsList';
 import ArticlePage from './components/ArticlePage';
 import TopicArticles from './components/TopicArticles';
+import Error from './components/Error';
 
 function App() {
     return (
@@ -19,8 +19,8 @@ function App() {
             <Route path="/topics" element={<Topics/>}/>
             <Route path="/articles/:article_id" element={<ArticlePage/>}/>
             <Route path="/topics/:topic" element={<TopicArticles/>}/>
+            <Route path="/*" element={<Error/>}/>
             </Routes>
-            <NavFooter/>
         </main>
     );  
 };
