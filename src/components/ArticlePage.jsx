@@ -79,8 +79,8 @@ const ArticlePage = () => {
                 <div className="article-page-votes">   
                     {votes === 1 && <p>{votes} vote</p>}
                     {votes !== 1 && <p>{votes} votes</p>}
-                    <button onClick={() => {handleUpvote(article_id, 1)}}>upvote</button>
-                    <button onClick={() => {handleDownvote(article_id, -1)}}>downvote</button>
+                    <button onClick={() => {handleUpvote( article_id, 1 )}} disabled={upvoteDisabled}>upvote</button>
+                    <button onClick={() => {handleDownvote( article_id, -1 )}} disabled={downvoteDisabled}>downvote</button>
                 </div>
                 <CommentList setShowError={setShowError}/>
                 <ToastContainer position='middle-end' containerPosition='fixed'>
