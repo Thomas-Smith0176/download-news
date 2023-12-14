@@ -3,8 +3,9 @@ import { getArticleById, patchArticle } from '../utils/api';
 import { useEffect, useState } from 'react';
 import CommentList from './CommentsList';
 import parseDate from '../utils/dates';
-import { Button, Toast, ToastContainer } from 'react-bootstrap';
+import { ToastContainer } from 'react-bootstrap';
 import ErrorToast from './ErrorToast';
+import Error from './Error';
 
 
 const ArticlePage = () => {
@@ -17,27 +18,32 @@ const ArticlePage = () => {
     const [upvoteClick, setUpvoteClick] = useState(false)
     const [downvoteClick, setDownvoteClick] = useState(false)
     const [showError, setShowError] = useState(false)
-    const [errorMsg, setErrorMsg] = useState('')
+    const [errorMsg, setErrorMsg] = useState()
+    const [errStatus, setErrorStatus] = useState()
+    const [errorThrown, setErrorThrown] = useState(false)
+    console.log(errorThrown)
 
     useEffect(() => {
         getArticleById(article_id).then((res) => {
             setArticle(res.data.article)
             setVotes(res.data.article.votes)
             setIsLoading(false)
+        }).catch((err) => {
+            setErrorThrown(true)
+            setErrorMsg(err.response.data.msg)
+            setErrorStatus(err.response.status)
         })
     }, [])
 
     function handleUpvote( article_id, incVote) {
         setDownvoteDisabled(true)   
         if (upvoteClick) {
-            console.log('second click')
             incVote = incVote - 2
             setDownvoteDisabled(false)
             setUpvoteDisabled(false)
             setUpvoteClick(false)
         }
         else {
-            console.log('first click')
             setUpvoteClick(true)
         }
         setVotes((currVotes) => currVotes + incVote)
@@ -71,16 +77,21 @@ const ArticlePage = () => {
         })
     }
     
+    if(errorThrown) {
+        return <Error location={'article'} status={errStatus} message={errorMsg}/>
+    }
+    
     if (isLoading) {
         return <p>Loading...</p>
     }
+
     
         return (
             <section className='article-page'>
                 <h2>{article.title}</h2>
-                <h3>{article.author}</h3>
+                <h3>By {article.author}</h3>
                 <p>{`uploaded ${parseDate(article.created_at)}`}</p>
-                <img className="article-page-img" src={article.article_img_url}></img>
+                <img className="article-page-img" src={article.article_img_url} alt={`cover imgage for ${article.title}`}></img>
                 <p>{article.body}</p>
                 <div className="article-page-votes">   
                     {votes === 1 && <p>{votes} vote</p>}
@@ -88,8 +99,8 @@ const ArticlePage = () => {
                     <button onClick={() => {handleUpvote( article_id, 1 )}} disabled={upvoteDisabled}>upvote</button>
                     <button onClick={() => {handleDownvote( article_id, -1 )}} disabled={downvoteDisabled}>downvote</button>
                 </div>
-                <CommentList setShowError={setShowError}/>
-                <ToastContainer position='middle-end' containerPosition='fixed'>
+                <CommentList setShowError={setShowError} setErrorMsg={setErrorMsg}/>
+                <ToastContainer position='middle-center' containerPosition='fixed'>
                     <ErrorToast setShowError={setShowError} showError={showError} errorMsg={errorMsg}/>
                 </ToastContainer>
             </section>

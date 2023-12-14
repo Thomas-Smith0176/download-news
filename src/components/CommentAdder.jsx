@@ -5,7 +5,7 @@ import { UserContext } from '../contexts/User';
 import { useParams } from 'react-router-dom';
 import parseDate from '../utils/dates';
 
-const CommentAdder = ({setComments}) => {
+const CommentAdder = ({setComments, setShowError, setErrorMsg}) => {
     const {currUser, setCurrUser} = useContext(UserContext)
     const {article_id} = useParams()
 
@@ -13,9 +13,11 @@ const CommentAdder = ({setComments}) => {
     const [err, setErr] = useState(null)
     const [tempId, setTempId] = useState(0)
 
-    function handlePostComment() {
+    function handlePostComment(event) {
+        event.preventDefault()
         if (newComment.length === 0) {
-            return <p></p>
+            setShowError(true)
+            setErrorMsg("Comment can't be empty")
         }
         else {
             setNewComment('')
@@ -43,7 +45,7 @@ const CommentAdder = ({setComments}) => {
             <Form.Label className="comment-label">Post a comment</Form.Label>
             <Form.Control type="text" placeholder="new comment..." value={newComment} onChange={(event) => setNewComment(event.target.value)}></Form.Control>
             {err && <p>{err}</p>}
-            <Button onClick={() => {handlePostComment()}}>Post</Button>
+            <Button onClick={() => {handlePostComment(event)}}>Post</Button>
         </Form>}
         </>
     )

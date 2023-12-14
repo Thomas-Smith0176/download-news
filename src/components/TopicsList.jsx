@@ -4,7 +4,6 @@ import TopicCard from "./TopicCard";
 
 const Topics = () => {
     const [topics, setTopics] = useState([])
-
     const [isLoading, setIsLoading] = useState(true)
     
     useEffect(() => {

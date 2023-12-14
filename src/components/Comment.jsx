@@ -4,7 +4,7 @@ import { UserContext } from "../contexts/User";
 import { Button } from "react-bootstrap";
 import { deleteComment } from "../utils/api";
 
-const Comment = ({ comment, setComments, setShowError }) => {
+const Comment = ({ comment, setComments, setShowError, setErrorMsg }) => {
   const { currUser, setCurrUser } = useContext(UserContext);
   const [loadingDelete, setLoadingDelete] = useState(false)
 
@@ -21,7 +21,8 @@ const Comment = ({ comment, setComments, setShowError }) => {
     );
     }).catch(() => {
       setLoadingDelete(false)
-      setShowError((currShow) => currShow = true)
+      setShowError(true)
+      setErrorMsg('Failed to delete comment')
       });
   }
 

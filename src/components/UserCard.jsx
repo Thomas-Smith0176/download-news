@@ -7,7 +7,6 @@ const UserCard = ({user}) => {
 
     return (
         <section>
-            {/* <a onClick={() => {setCurrUser(user)}}> */}
             <a onClick={() => {setCurrUser(user)}}>
             <p>{user.username}</p>
             <p>{`"${user.name}"`}</p>
