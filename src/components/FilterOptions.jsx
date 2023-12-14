@@ -14,6 +14,7 @@ const FilterOptions = ({setSortBy, setOrder}) => {
           }}>
             <option value="created_at">Date uploaded</option>
             <option value="votes">Votes</option>
+            <option value="comment_count">Total comments</option>
           </Form.Select>
           <Form.Check
             inline

@@ -11,7 +11,7 @@ const Home = () => {
 
     useEffect(()=> {
         getArticles(sortBy, order).then((res) => {
-            setArticles(res.data.articles)
+            setArticles([...res.data.articles])
             setIsLoading(false)
         })
     }, [sortBy, order])
