@@ -1,18 +1,17 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useState } from "react";
 import parseDate from "../utils/dates";
 import { UserContext } from "../contexts/User";
-import { Button, Toast, ToastBody, ToastHeader } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { deleteComment } from "../utils/api";
 
-const Comment = ({ comment, setComments, setShow }) => {
+const Comment = ({ comment, setComments, setShowError }) => {
   const { currUser, setCurrUser } = useContext(UserContext);
-  const [err, setErr] = useState(null);
-  const [deletedComment, setDeletedComment] = useState();
+  const [loadingDelete, setLoadingDelete] = useState(false)
 
   function handleDelete() {
-    setDeletedComment(comment);
-    setShow((currShow) => currShow = true)
-    setComments((currComments) =>
+    setLoadingDelete(true)
+    deleteComment(comment.comment_id).then(() => {
+      setComments((currComments) =>
       currComments.filter((currComment) => {
         if (currComment.comment_id !== comment.comment_id) {
           return true;
@@ -20,11 +19,9 @@ const Comment = ({ comment, setComments, setShow }) => {
         return false;
       })
     );
-    console.log(comment.comment_id)
-    deleteComment(comment.comment_id)
-      .catch(() => {
-        setErr("Something went wrong! Please try that again");
-        setComments((currComments) => [deletedComment, ...currComments]);
+    }).catch(() => {
+      setLoadingDelete(false)
+      setShowError((currShow) => currShow = true)
       });
   }
 
@@ -34,8 +31,8 @@ const Comment = ({ comment, setComments, setShow }) => {
       <p className="comment-date">{`${parseDate(comment.created_at)}`}</p>
       <p className="comment-body">{comment.body}</p>
       <p className="comment-votes">{comment.votes} votes</p>
-      {currUser && currUser.username === comment.author && (<Button onClick={() => {handleDelete();}} className="comment-delete">Delete</Button>)}
-      {err && <p>{err}</p>}
+      {currUser && currUser.username === comment.author && !loadingDelete && (<Button onClick={() => {handleDelete();}} className="comment-delete">Delete</Button>)}
+      {currUser && currUser.username === comment.author && loadingDelete && (<p>Processing...</p>)}
     </section>
   );
 };

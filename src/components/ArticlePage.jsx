@@ -10,12 +10,12 @@ const ArticlePage = () => {
     const {article_id} = useParams()
     const [article, setArticle] = useState()
     const [isLoading, setIsLoading] = useState(true)
-    const [votes, setVotes] = useState()
-    const [show, setShow] = useState(false)
+    const [votes, setVotes] = useState(0)
     const [upvoteDisabled, setUpvoteDisabled] = useState(false)
     const [downvoteDisabled, setDownvoteDisabled] = useState(false)
     const [upvoteClick, setUpvoteClick] = useState(false)
     const [downvoteClick, setDownvoteClick] = useState(false)
+    const [showError, setShowError] = useState(false)
 
     useEffect(() => {
         getArticleById(article_id).then((res) => {
@@ -64,7 +64,7 @@ const ArticlePage = () => {
             //error message toast here
         })
     }
-
+    
     if (isLoading) {
         return <p>Loading...</p>
     }
@@ -82,9 +82,9 @@ const ArticlePage = () => {
                     <button onClick={() => {handleUpvote( article_id, 1 )}} disabled={upvoteDisabled}>upvote</button>
                     <button onClick={() => {handleDownvote( article_id, -1 )}} disabled={downvoteDisabled}>downvote</button>
                 </div>
-                <CommentList setShow={setShow}/>
+                <CommentList setShowError={setShowError}/>
                 <ToastContainer position='middle-end' containerPosition='fixed'>
-                <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
+                <Toast onClose={() => setShowError(false)} show={showError} delay={3000} autohide>
                 <Toast.Header>
                     <img
                     src="holder.js/20x20?text=%20"
@@ -92,7 +92,7 @@ const ArticlePage = () => {
                     alt=""
                     />
                 </Toast.Header>
-                <Toast.Body>Comment Deleted!</Toast.Body>
+                <Toast.Body>Failed to delete comment, please try again</Toast.Body>
                 </Toast>
                 </ToastContainer>
             </section>

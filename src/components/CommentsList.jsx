@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import Comment from "./Comment";
 import CommentAdder from "./CommentAdder";
 
-const CommentList = ({setShow}) => {
+const CommentList = ({setShowError}) => {
     const {article_id} = useParams();
     const [comments, setComments] = useState();
     const [isLoading, setIsLoading] = useState(true);
@@ -26,7 +26,7 @@ const CommentList = ({setShow}) => {
             <CommentAdder setComments={setComments}/>
             {comments.length === 0 && <p>No comments yet!</p>}
             {comments.map((comment) => {
-                return <Comment key={comment.comment_id} comment={comment} setComments={setComments} setShow={setShow}/>
+                return <Comment key={comment.comment_id} comment={comment} setComments={setComments} setShowError={setShowError}/>
             })}
         </section>
     );
