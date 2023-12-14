@@ -26,17 +26,19 @@ const ArticlePage = () => {
     }, [])
 
     function handleUpvote( article_id, incVote) {
-        setVotes((currVotes) => currVotes + incVote)
         setDownvoteDisabled(true)   
         if (upvoteClick) {
-                incVote = incVote - 2
-                setDownvoteDisabled(false)
-                setUpvoteDisabled(false)
-                setUpvoteClick(false)
-            }
+            console.log('second click')
+            incVote = incVote - 2
+            setDownvoteDisabled(false)
+            setUpvoteDisabled(false)
+            setUpvoteClick(false)
+        }
         else {
+            console.log('first click')
             setUpvoteClick(true)
         }
+        setVotes((currVotes) => currVotes + incVote)
         patchArticle(article_id, incVote).catch((err) => {
             setVotes((currVotes) => currVotes - incVote)
             setUpvoteDiabled(false)
@@ -46,7 +48,6 @@ const ArticlePage = () => {
     }
 
     function handleDownvote (article_id, incVote) {
-        setVotes((currVotes) => currVotes + incVote)
         setUpvoteDisabled(true)
         if (downvoteClick) {
             incVote = incVote + 2
@@ -57,6 +58,7 @@ const ArticlePage = () => {
         else {
             setDownvoteClick(true)
         }
+        setVotes((currVotes) => currVotes + incVote)
         patchArticle(article_id, incVote).catch((err) => {
             setVotes((currVotes) => currVotes - incVote)
             setUpvoteDiabled(false)
