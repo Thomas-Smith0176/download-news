@@ -10,9 +10,12 @@ const ArticlePage = () => {
     const {article_id} = useParams()
     const [article, setArticle] = useState()
     const [isLoading, setIsLoading] = useState(true)
-    const [votes, setVotes] = useState(0)
-    const [err, setErr] = useState(null)
+    const [votes, setVotes] = useState()
     const [show, setShow] = useState(false)
+    const [upvoteDisabled, setUpvoteDisabled] = useState(false)
+    const [downvoteDisabled, setDownvoteDisabled] = useState(false)
+    const [upvoteClick, setUpvoteClick] = useState(false)
+    const [downvoteClick, setDownvoteClick] = useState(false)
 
     useEffect(() => {
         getArticleById(article_id).then((res) => {
@@ -22,11 +25,43 @@ const ArticlePage = () => {
         })
     }, [])
 
-    function handleVote(article_id, incVote) {
+    function handleUpvote( article_id, incVote) {
         setVotes((currVotes) => currVotes + incVote)
+        setDownvoteDisabled(true)   
+        if (upvoteClick) {
+                incVote = incVote - 2
+                setDownvoteDisabled(false)
+                setUpvoteDisabled(false)
+                setUpvoteClick(false)
+            }
+        else {
+            setUpvoteClick(true)
+        }
         patchArticle(article_id, incVote).catch((err) => {
             setVotes((currVotes) => currVotes - incVote)
-            setErr('Something went wrong! Please try that again')
+            setUpvoteDiabled(false)
+            setDownvoteDiabled(false)
+            //error message toast here
+        })
+    }
+
+    function handleDownvote (article_id, incVote) {
+        setVotes((currVotes) => currVotes + incVote)
+        setUpvoteDisabled(true)
+        if (downvoteClick) {
+            incVote = incVote + 2
+            setUpvoteDisabled(false)
+            setDownvoteDisabled(false)
+            setDownvoteClick(false)
+        }
+        else {
+            setDownvoteClick(true)
+        }
+        patchArticle(article_id, incVote).catch((err) => {
+            setVotes((currVotes) => currVotes - incVote)
+            setUpvoteDiabled(false)
+            setDownvoteDiabled(false)
+            //error message toast here
         })
     }
 
@@ -44,9 +79,8 @@ const ArticlePage = () => {
                 <div className="article-page-votes">   
                     {votes === 1 && <p>{votes} vote</p>}
                     {votes !== 1 && <p>{votes} votes</p>}
-                    <Button onClick={() => {handleVote(article_id, 1)}}>upvote</Button>
-                    <Button onClick={() => {handleVote(article_id, -1)}}>downvote</Button>
-                    {err && <p>{err}</p>}
+                    <button onClick={() => {handleUpvote( article_id, 1 )}} disabled={upvoteDisabled}>upvote</button>
+                    <button onClick={() => {handleDownvote( article_id, -1 )}} disabled={downvoteDisabled}>downvote</button>
                 </div>
                 <CommentList setShow={setShow}/>
                 <ToastContainer position='middle-end' containerPosition='fixed'>
