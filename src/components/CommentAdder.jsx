@@ -45,7 +45,7 @@ const CommentAdder = ({setComments, setShowError, setErrorMsg}) => {
             <Form.Label className="comment-label">Post a comment</Form.Label>
             <Form.Control type="text" placeholder="new comment..." value={newComment} onChange={(event) => setNewComment(event.target.value)}></Form.Control>
             {err && <p>{err}</p>}
-            <Button onClick={() => {handlePostComment(event)}}>Post</Button>
+            <Button onClick={() => {handlePostComment(event)}} className="comment-post">Post</Button>
         </Form>}
         </>
     )

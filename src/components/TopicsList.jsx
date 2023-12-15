@@ -21,7 +21,7 @@ const Topics = () => {
     return (
         <section className="topics">
             <h2>All Topics</h2>
-            {topics.map((topic) => {
+            {topics.map((topic, index) => {
                     return (
                         <TopicCard key={topic.slug} topic={topic}/>
                     )

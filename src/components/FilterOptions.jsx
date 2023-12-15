@@ -5,7 +5,8 @@ const FilterOptions = ({setSortBy, sortBy = 'created_at', setOrder}) => {
   console.log(sortBy)
 
   return (
-    <Accordion>
+    <section >
+    <Accordion className="sort-articles">
       <Accordion.Header>Sort Articles</Accordion.Header>
       <Accordion.Body>
         <Form>
@@ -26,7 +27,7 @@ const FilterOptions = ({setSortBy, sortBy = 'created_at', setOrder}) => {
             type="radio"
             id={`inline-radio-1`}
             onClick={(event) => {setOrder(event.target.value)}}
-          />
+            />
           <Form.Check
             inline
             label="Oldest"
@@ -35,7 +36,7 @@ const FilterOptions = ({setSortBy, sortBy = 'created_at', setOrder}) => {
             type="radio"
             id={`inline-radio-2`}
             onClick={(event) => {setOrder(event.target.value)}}
-          /></>}
+            /></>}
           {["comment_count", "votes"].includes(sortBy) && <>
           <Form.Check
             inline
@@ -45,7 +46,7 @@ const FilterOptions = ({setSortBy, sortBy = 'created_at', setOrder}) => {
             type="radio"
             id={`inline-radio-1`}
             onClick={(event) => {setOrder(event.target.value)}}
-          />
+            />
           <Form.Check
             inline
             label="Least popular"
@@ -54,10 +55,11 @@ const FilterOptions = ({setSortBy, sortBy = 'created_at', setOrder}) => {
             type="radio"
             id={`inline-radio-2`}
             onClick={(event) => {setOrder(event.target.value)}}
-          /></>}
+            /></>}
         </Form>
       </Accordion.Body>
     </Accordion>
+            </section>
   );
 };
 

@@ -5,7 +5,7 @@ const ArticleCard = ({article}) => {
 
     return (
         <section className="article-card">
-            <Link to={`/articles/${article.article_id}`}>
+            <Link to={`/articles/${article.article_id}`} className="article-card-link">
                 <div className="article-card-img-cropper">
                 <img className="article-card-img" src={article.article_img_url} alt={`cover image for article ${article.title}`}></img>
                 </div>

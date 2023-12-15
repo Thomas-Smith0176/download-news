@@ -32,7 +32,10 @@ const TopicArticles = () => {
     if (isLoading) {
         return <p>Loading...</p>
     }
-    return <ArticleList articles={topicArticles} setSortBy={setSortBy} setOrder={setOrder}/>
+    return <>
+    <h2>All {topic[0].toUpperCase() + topic.slice(1)} Articles</h2>
+    <ArticleList articles={topicArticles} setSortBy={setSortBy} setOrder={setOrder}/>
+    </>
 };
 
 export default TopicArticles;

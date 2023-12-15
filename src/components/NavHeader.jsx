@@ -17,19 +17,16 @@ const NavHeader = () => {
     return (
         <nav className="nav-header">
             <>
-      <Button variant="primary" onClick={handleShow} className='nav-button'>
+      <button onClick={handleShow} className='nav-button-account'>
      Account
-      </Button>
-        {/* <Link id="home-link" to="/" > */}
-      <Button variant='primary' aria-label='link to home page' className='nav-button' onClick={() => {navigate("/")}}>
+      </button>
+      <button aria-label='link to home page' className='nav-button' onClick={() => {navigate("/")}} autoFocus>
           Home
-      </Button>
-          {/* </Link> */}
-        {/* <Link id="topics-link" to="/topics"> */}
-      <Button variant='primary' aria-label='link to topics page' className='nav-button' onClick={() => {navigate("/topics")}}>
+      </button>
+      <button aria-label='link to topics page' className='nav-button' onClick={() => {navigate("/topics")}}>
           Topics
-      </Button>
-          {/* </Link> */}
+      </button>
+
 
       <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton>
@@ -47,7 +44,7 @@ const NavHeader = () => {
             </Accordion.Body>
           </Accordion>
         </Offcanvas.Body>
-          {currUser && <Button variant="primary" onClick={()=>{setCurrUser(undefined)}}>Sign out</Button>}
+          {currUser && <Button variant="primary" onClick={()=>{setCurrUser(undefined)}} className='user-signout'>Sign out</Button>}
       </Offcanvas>
     </>
         </nav>

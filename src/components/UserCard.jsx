@@ -6,13 +6,13 @@ const UserCard = ({user}) => {
     const {currUser, setCurrUser} = useContext(UserContext)
 
     return (
-        <section>
+        <section className="user-card">
             <a onClick={() => {setCurrUser(user)}}>
-            <p>{user.username}</p>
-            <p>{`"${user.name}"`}</p>
+            <p className="user-username">{user.username}</p>
             <div className="user-avatar-cropper">
             <img src={user.avatar_url} alt={`${user.username} avatar`} className="user-avatar-img"></img>
             </div>
+            <p className="user-name">{`"${user.name}"`}</p>
             </a>
         </section>
     );

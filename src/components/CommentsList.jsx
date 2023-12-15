@@ -21,7 +21,7 @@ const CommentList = ({setShowError, setErrorMsg}) => {
     }
 
     return (
-        <section className="comments">
+        <section >
             <h4>Comments</h4>
             <CommentAdder setComments={setComments} setShowError={setShowError} setErrorMsg={setErrorMsg}/>
             {comments.length === 0 && <p>No comments yet!</p>}

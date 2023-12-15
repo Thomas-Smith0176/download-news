@@ -9,7 +9,6 @@ const getArticles = (sortBy='created_at', order='desc') => {
 };
 
 const getArticleById = (articleId) => {
-    console.log(`/articles/${articleId}`)
     return newsApi.get(`/articles/${articleId}`)
 };
 
@@ -19,6 +18,10 @@ const getComments = (articleId) => {
 
 const getUsers = () => {
     return newsApi.get("/users")
+};
+
+const getUserByUsername = (username) => {
+    return newsApi.get(`/users/${username}`)
 };
 
 const getTopics = () => {
@@ -40,8 +43,12 @@ const postComment = (articleId, username, comment) => {
     })
 };
 
+const patchComment = (commentId, incVote) => {
+    return newsApi.patch(`/comments/${commentId}`, {inc_votes: incVote})
+}
+
 const deleteComment = (commentId) => {
     return newsApi.delete(`/comments/${commentId}`)
 };
 
-export { getArticles, getArticleById, getComments, getUsers, getTopics, getArticlesByTopic, patchArticle, postComment, deleteComment };
+export { getArticles, getArticleById, getComments, getUsers, getUserByUsername, getTopics, getArticlesByTopic, patchArticle, postComment, patchComment, deleteComment };
