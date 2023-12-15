@@ -3,7 +3,7 @@ import ArticleCard from './ArticleCard';
 import FilterOptions from './FilterOptions';
 import { UserContext } from '../contexts/User';
 
-const ArticleList = ({articles, setSortBy, setOrder}) => {
+const ArticleList = ({articles, setSortBy, sortBy, setOrder}) => {
 
     const {currUser, setCurrUser} = useContext(UserContext)
 
@@ -11,7 +11,7 @@ const ArticleList = ({articles, setSortBy, setOrder}) => {
 
     return (
         <section className="home">
-            <FilterOptions setSortBy={setSortBy} setOrder={setOrder}/>
+            <FilterOptions setSortBy={setSortBy} sortBy={sortBy} setOrder={setOrder}/>
             <div className="article-list">    
             {articles.map((article) => {
                 return <ArticleCard key={article.article_id} article={article}/>

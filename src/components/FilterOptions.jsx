@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Accordion, Form } from "react-bootstrap";
 
-const FilterOptions = ({setSortBy, setOrder}) => {
+const FilterOptions = ({setSortBy, sortBy = 'created_at', setOrder}) => {
+  console.log(sortBy)
 
   return (
     <Accordion>
@@ -16,9 +17,10 @@ const FilterOptions = ({setSortBy, setOrder}) => {
             <option value="votes">Votes</option>
             <option value="comment_count">Total comments</option>
           </Form.Select>
+          {sortBy==="created_at" && <>
           <Form.Check
             inline
-            label="Descending"
+            label="Most recent"
             value="desc"
             name="group1"
             type="radio"
@@ -27,13 +29,32 @@ const FilterOptions = ({setSortBy, setOrder}) => {
           />
           <Form.Check
             inline
-            label="Ascending"
+            label="Oldest"
             value="asc"
             name="group1"
             type="radio"
             id={`inline-radio-2`}
             onClick={(event) => {setOrder(event.target.value)}}
+          /></>}
+          {["comment_count", "votes"].includes(sortBy) && <>
+          <Form.Check
+            inline
+            label="Most popular"
+            value="desc"
+            name="group1"
+            type="radio"
+            id={`inline-radio-1`}
+            onClick={(event) => {setOrder(event.target.value)}}
           />
+          <Form.Check
+            inline
+            label="Least popular"
+            value="asc"
+            name="group1"
+            type="radio"
+            id={`inline-radio-2`}
+            onClick={(event) => {setOrder(event.target.value)}}
+          /></>}
         </Form>
       </Accordion.Body>
     </Accordion>

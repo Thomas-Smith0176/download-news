@@ -20,7 +20,7 @@ const Home = () => {
         return <p>Loading...</p>
     }
 
-    return <ArticleList articles={articles} setSortBy={setSortBy} setOrder={setOrder}/>
+    return <ArticleList articles={articles} setSortBy={setSortBy} sortBy={sortBy} setOrder={setOrder}/>
 };
 
 export default Home;
