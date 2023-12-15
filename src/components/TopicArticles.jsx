@@ -33,7 +33,9 @@ const TopicArticles = () => {
         return <p>Loading...</p>
     }
     return <>
+    <div className={`topics-page-${topic}`}>
     <h2>All {topic[0].toUpperCase() + topic.slice(1)} Articles</h2>
+    </div>
     <ArticleList articles={topicArticles} setSortBy={setSortBy} setOrder={setOrder}/>
     </>
 };
